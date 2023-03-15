@@ -1,0 +1,28 @@
+library IEEE; 
+use IEEE.std_logic_1164.all; 
+use IEEE.std_logic_signed.all; 
+entity comp is 
+ port( A : in std_logic_vector(7 downto 0); 
+ B : in std_logic_vector(7 downto 0); 
+ A_sup_B : out std_logic; 
+ A_inf_B : out std_logic; 
+ A_egal_B : out std_logic); 
+end comp; 
+architecture comporte of comp is 
+begin 
+ process(A, B) begin 
+ if (A > B) then 
+ A_sup_B <= '1'; 
+ A_inf_B <= '0'; 
+ A_egal_B <= '0'; 
+ 	elsif (A < B) then 
+ 	A_sup_B <= '0'; 
+	A_inf_B <= '1'; 
+ 	A_egal_B <= '0'; 
+	 	else 
+ 		A_sup_B <= '0'; 
+ 		A_inf_B <= '0'; 
+ 		A_egal_B <= '1'; 
+ end if; 
+ end process; 
+end comporte ;

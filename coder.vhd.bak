@@ -1,0 +1,20 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use ieee.std_logic_unsigned.all;
+
+entity coder is 
+  port(
+    E :in std_logic_vector(7 downto 0);
+    S: out std_logic_vector(2 downto 0));
+end coder;
+
+architecture behavioral of coder is
+begin
+  S(0)<=E(1) or E(3) or  E(5) or E(7);
+  S(1)<=E(2) or E(3) or E(6) or E(7);
+  S(2)<=E(4) or E(5) or E(6) or E(7);
+      
+end process;
+end behavioral;
+             

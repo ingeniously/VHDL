@@ -1,0 +1,36 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use ieee.std_logic_unsigned.all;
+
+entity compteur_Decodeur is 
+      port(
+    load:in std_logic;
+    clk:in std_logic;
+    clear:in std_logic;
+    count_ena:in std_logic;
+    Direction:in std_logic;
+    P: in std_logic_vector(4 downto 1);
+    S: out std_logic_vector(4 downto 1):="0000");
+end compteur_Decodeur;
+
+architecture behavioral of compteur_Decodeur is
+signal C: std_logic_vector(4 downto 1):="0000";
+begin
+   process(load,clk,clear,count_ena,Direction,P) 
+      begin
+      if clear ='1' then
+        S<="0000";
+      elsif (load='1' and clear='0') then
+        S<=P;      
+      elsif (clk'event and clk='1') then
+                if (count_ena='1' and direction='0') then
+                C <=STD_lOGIC_VECTOR(UNSIGNED(C-1));
+                elsif (count_ena='1' and direction='1') then
+                C <=STD_lOGIC_VECTOR(UNSIGNED(C+1));
+                end if;
+      end if;
+   end process;
+    S<= C;
+end behavioral;
+             

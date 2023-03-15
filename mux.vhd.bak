@@ -1,0 +1,27 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity mux is 
+      port(
+    E: in std_logic_vector(4 downto 1);
+    SEL: in std_logic_vector(1 downto 0);
+    S:out std_logic);
+end mux;
+
+architecture behavioral of mux is
+begin
+   process(E,SEL) is
+      begin
+        if SEL ="00" then
+           S<=E(1);
+         elsif SEL="01" then
+           S<=E(2);
+          elsif SEL="10" then
+           S<=E(3);
+          elsif  SEL="11" then
+           S<=E(4);
+        end if;
+   end process;
+end mux;
+             
+

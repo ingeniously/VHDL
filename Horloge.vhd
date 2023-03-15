@@ -1,0 +1,23 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use ieee.std_logic_unsigned.all;
+
+entity Horloge is 
+      port(
+    H:in std_logic;
+    S: out std_logic_vector(4 downto 1):="0000");
+end Horloge;
+
+architecture behavioral of Horloge is
+signal C: std_logic_vector(4 downto 1):="0000";
+begin
+   process(H) 
+      begin
+        if (H'event and H='1') then
+           C <=STD_lOGIC_VECTOR(UNSIGNED(C+1));
+        end if;
+   end process;
+    S<=C;
+end behavioral;
+             

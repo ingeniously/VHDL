@@ -1,0 +1,42 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use ieee.std_logic_unsigned.all;
+entity ALU_8_bits is 
+      port(
+    A: in std_logic_vector(8 downto 1);
+    B: in std_logic_vector(8 downto 1);
+    S: in std_logic_vector(6 downto 1);
+    Y: out std_logic_vector(8 downto 1));
+end ALU_8_bits;
+
+architecture behavioral of ALU_8_bits is
+begin
+   process(A,B,S) is
+      begin
+        case S is
+          when "000000"  =>Y<=A;
+          when "000001"  =>Y<=STD_lOGIC_VECTOR(UNSIGNED(A+1));
+          when "000010"  =>Y<=A+B;
+          when "000011"  =>Y<=STD_lOGIC_VECTOR(UNSIGNED(A+B+1));
+          when "000100"   =>Y<=A + not(B);
+          when "000101"   =>Y<=STD_lOGIC_VECTOR(UNSIGNED(A+not(B)+1));
+          when "000110"   =>Y<=STD_lOGIC_VECTOR(UNSIGNED(A-1));
+          when "000111"   =>Y<= B;
+
+           when "001000"   =>Y<= A and B;
+           when "001010"   =>Y<= A or B;
+           when "001100"   =>Y<= A xor B;
+           when "001110"   =>Y<= not(A);
+
+           when "010000"   =>Y<= shift_right(unsigned(A), 1);
+           when "100000"   =>Y<= shift_left(unsigned(A), 1);
+           when "110000"   =>Y<= "00000000";
+
+
+          when others =>Y<="00000000";
+
+        end case;
+   end process;
+end behavioral;
+             
